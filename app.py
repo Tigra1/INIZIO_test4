@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, render_template, send_file
 import requests
 from bs4 import BeautifulSoup
 import os
@@ -9,11 +9,17 @@ app = Flask(__name__)
 SAVE_DIR = "results"
 os.makedirs(SAVE_DIR, exist_ok=True)
 
-@app.route('/search', methods=['GET'])
+# Главная страница с формой
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+# Обработка поискового запроса
+@app.route('/search', methods=['POST'])
 def search_google_and_save():
-    query = request.args.get('query')
+    query = request.form.get('query')
     if not query:
-        return jsonify({"error": "Параметр 'query' обязателен!"}), 400
+        return "Параметр 'query' обязателен!", 400
 
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
@@ -22,12 +28,12 @@ def search_google_and_save():
 
     response = requests.get(search_url, headers=headers)
     if response.status_code != 200:
-        return jsonify({"error": "Ошибка при выполнении запроса!"}), 500
+        return "Ошибка при выполнении запроса!", 500
 
     soup = BeautifulSoup(response.text, 'html.parser')
     first_result = soup.select_one('.tF2Cxc')
     if not first_result:
-        return jsonify({"error": "Не удалось найти результаты!"}), 404
+        return "Не удалось найти результаты!", 404
 
     title = first_result.select_one('.DKV0Md').text
     link = first_result.select_one('.yuRUbf a')['href']
