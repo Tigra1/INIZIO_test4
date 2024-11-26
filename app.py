@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-# Директория для сохранения файлов
+# Директория для сохранения файлов.
 SAVE_DIR = "results"
 os.makedirs(SAVE_DIR, exist_ok=True)
 
