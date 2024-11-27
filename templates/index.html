@@ -4,13 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google Search Saver</title>
+    <style>
+
+    .button {
+        padding: 10px;
+        background-color: #0f4a7a;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .button:hover {
+        background-color: #0a2d4b;
+    }
+    .top-menu-sale {
+        background: #0f4a7a;
+        display: flex;
+        height: 70px;
+        color: aliceblue;
+        padding: 1%;
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+    }
+    body{
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+    }
+    h1 {
+        margin-left: 4%;
+    }
+    .bbody {
+        position: absolute;
+        top: 25%;
+        left: 5%;
+    }
+    textarea {
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+    </style>
 </head>
 <body>
-    <h1>Google Search Saver</h1>
-    <form action="/search" method="post">
-        <label for="query">Введите запрос:</label><br>
-        <input type="text" id="query" name="query" required>
-        <button type="submit">Искать</button>
-    </form>
+    <div class="top-menu-sale">
+        <h1>Google Search Saver</h1>
+    </div>
+        <form action="/search" method="post" class="bbody">
+
+            <textarea id="query" name="query" required rows="5" cols="50" placeholder="Zadejte klíčové slovní spojení"></textarea><br><br>
+            <button type="submit" class="button">Vyhledat</button>
+        </form>
 </body>
 </html>
