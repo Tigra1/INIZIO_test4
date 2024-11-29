@@ -5,7 +5,7 @@ import os
 #import logging
 
 app = Flask(__name__)
-logging.basicConfig(level=logging.DEBUG)
+#logging.basicConfig(level=logging.DEBUG)
 # Директория для сохранения файлов
 SAVE_DIR = "results"
 os.makedirs(SAVE_DIR, exist_ok=True)
