@@ -3,10 +3,10 @@ import requests
 from bs4 import BeautifulSoup
 import os
 
-# import logging
+import logging
 
 app = Flask(__name__)
-#logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG)
 # Uložení souboru
 SAVE_DIR = "results"
 os.makedirs(SAVE_DIR, exist_ok=True)
@@ -30,7 +30,7 @@ def search_google_and_save():
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
         }
         search_url = f"https://www.google.com/search?q={query}&hl=en"
-        # logging.debug(f"URL: {search_url}")  # Logovani URL
+        logging.debug(f"URL: {search_url}")  # Logovani URL
         response = requests.get(search_url, headers=headers)
         if response.status_code != 200:
             return "Chyba při provádění požadavku!", 500
@@ -56,7 +56,7 @@ def search_google_and_save():
         return send_file(filename, as_attachment=True)
 
     except Exception as e:
-        # +logging.error(f"Chyba při zpracování požadavku: {e}")
+        logging.error(f"Chyba při zpracování požadavku: {e}")
         return "Interní chyba serveru.", 500
 
 
